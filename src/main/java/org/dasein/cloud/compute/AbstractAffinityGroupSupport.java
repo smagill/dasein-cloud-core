@@ -27,6 +27,7 @@ import org.dasein.cloud.OperationNotSupportedException;
 import org.dasein.cloud.identity.ServiceAction;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Basic default implementations of all AffinityGroupSupport methods
@@ -51,7 +52,7 @@ public class AbstractAffinityGroupSupport<T extends CloudProvider> extends Abstr
     }
 
     @Override
-    public @Nonnull AffinityGroup get(@Nonnull String affinityGroupId) throws InternalException, CloudException{
+    public @Nullable AffinityGroup get(@Nonnull String affinityGroupId) throws InternalException, CloudException{
         throw new OperationNotSupportedException("Affinity Groups are not supported in " + getProvider().getCloudName());
     }
 
