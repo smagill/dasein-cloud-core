@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
 public class CloudException extends Exception {
     private static final long serialVersionUID = -1975104091752615199L;
     
-    private CloudErrorType errorType;
+    protected CloudErrorType errorType;
     private int            httpCode;
     private String         providerCode;
     
