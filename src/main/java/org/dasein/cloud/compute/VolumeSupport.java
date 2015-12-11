@@ -69,7 +69,7 @@ public interface VolumeSupport extends AccessControlledService {
             CloudException;
 
     /**
-     * Creates a snapshot with the specified bare-bones options.
+     * Creates a volume with the specified bare-bones options.
      * @param fromSnapshot the snapshot (if any) from which the volume should be created
      * @param sizeInGb the size of the volume to be created
      * @param inZone the data center into which the volume should be provisioned
