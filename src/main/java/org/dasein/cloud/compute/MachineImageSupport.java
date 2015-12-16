@@ -459,7 +459,7 @@ public interface MachineImageSupport extends AccessControlledService {
     public @Nonnull Iterable<MachineImage> searchMachineImages(@Nullable String keyword, @Nullable Platform platform, @Nullable Architecture architecture) throws CloudException, InternalException;
 
     /**
-     * Searches all snapshots visible to the current account owner (whether owned by the account owner or someone else)
+     * Searches all machine images visible to the current account owner (whether owned by the account owner or someone else)
      * for all images matching the specified image filter options. This differs from the {@link #listImages(ImageFilterOptions)}
      * method in that it covers all images, not just ones belonging to a specific account.
      * @param options filter criteria
