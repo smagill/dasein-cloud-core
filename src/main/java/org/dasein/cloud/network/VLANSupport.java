@@ -111,47 +111,6 @@ public interface VLANSupport extends AccessControlledService {
     public Route addRouteToVirtualMachine(@Nonnull String routingTableId, @Nonnull IPVersion version, @Nullable String destinationCidr, @Nonnull String vmId) throws CloudException, InternalException;
 
     /**
-     * Indicates that users may self-provision network interfaces. If false, either network interfaces are not supported
-     * or they cannot be self-provisioned
-     * @return true if users can self-provision network interfaces
-     * @throws CloudException an error occurred checking with the cloud if network interfaces may be self provisioned
-     * @throws InternalException an error occurred in the Dasein Cloud implementation determining support
-     * @deprecated use {@link VLANCapabilities#allowsNewNetworkInterfaceCreation()}
-     */
-    @Deprecated
-    public boolean allowsNewNetworkInterfaceCreation() throws CloudException, InternalException;
-
-    @Deprecated
-    public boolean allowsNewVlanCreation() throws CloudException, InternalException;
-
-    @Deprecated
-    public boolean allowsNewRoutingTableCreation() throws CloudException, InternalException;
-
-    @Deprecated
-    public boolean allowsNewSubnetCreation() throws CloudException, InternalException;
-
-    /**
-     * Indicates whether or not you can run both IPv4 and IPv6 over a subnet.
-     * @return true if you can run both types of traffic over the same subnet
-     * @throws CloudException an error occurred checking with the cloud for support
-     * @throws InternalException an error occurred in the Dasein Cloud implementation determining support
-     * @deprecated use {@link VLANCapabilities#allowsMultipleTrafficTypesOverSubnet()}
-     */
-    @Deprecated
-    public boolean allowsMultipleTrafficTypesOverSubnet() throws CloudException, InternalException;
-
-    /**
-     * Indicates whether or not you can run both IPv4 and IPv6 over a VLAN.
-     * @return true if you can run both types of traffic over the same VLAN
-     * @throws CloudException an error occurred checking with the cloud for support
-     * @throws InternalException an error occurred in the Dasein Cloud implementation determining support
-     * @deprecated use {@link VLANCapabilities#allowsMultipleTrafficTypesOverVlan()}
-     */
-    @Deprecated
-    public boolean allowsMultipleTrafficTypesOverVlan() throws CloudException, InternalException;
-
-
-    /**
      * Assigns the specified routing table to the target subnet.
      * @param subnetId the unique ID of the subnet being assigned the routing table
      * @param routingTableId the routing table to which the subnet is being assigned
@@ -215,22 +174,9 @@ public interface VLANSupport extends AccessControlledService {
      * @return the newly provisioned network interface
      * @throws CloudException an error occurred in the cloud while provisioning the interface
      * @throws InternalException a local error occurred during the provisoning of the interface
-     * @throws OperationNotSupportedException if {@link #allowsNewNetworkInterfaceCreation()} is false
+     * @throws OperationNotSupportedException if {@link VLANCapabilities#allowsNewNetworkInterfaceCreation()} is false
      */
     public @Nonnull NetworkInterface createNetworkInterface(@Nonnull NICCreateOptions options) throws CloudException, InternalException;
-
-    /**
-     * Provisions a subnet in the specified VLAN using the specified address space.
-     * @param cidr the CIDR of the address space within the target VLAN that will be used for the subnet
-     * @param inProviderVlanId the provider ID for the VLAN being subnetted
-     * @param name the name of the subnet
-     * @param description a description of the purpose of the subnet
-     * @return a newly created subnet
-     * @throws CloudException an error occurred in the cloud while provisioning the subnet
-     * @throws InternalException a local error occurred during the provisoning of the subnet
-     * @deprecated Use {@link #createSubnet(SubnetCreateOptions)}
-     */
-    public @Nonnull Subnet createSubnet(@Nonnull String cidr, @Nonnull String inProviderVlanId, @Nonnull String name, @Nonnull String description) throws CloudException, InternalException;
 
     /**
      * Provisions a subnet with the specified options for subnet creation.
@@ -270,34 +216,6 @@ public interface VLANSupport extends AccessControlledService {
     public VLANCapabilities getCapabilities() throws CloudException, InternalException;
 
     /**
-     * Specifies the maximum number of network interfaces that may be provisioned.
-     * @return the maximum number of network interfaces that may be provisioned or -1 for no limit or -2 for unknown
-     * @throws CloudException an error occurred requesting the limit from the cloud provider
-     * @throws InternalException a local error occurred figuring out the limit
-     * @deprecated use {@link VLANCapabilities#getMaxNetworkInterfaceCount()}
-     */
-    @Deprecated
-    public int getMaxNetworkInterfaceCount() throws CloudException, InternalException;
-
-    @Deprecated
-    public int getMaxVlanCount() throws CloudException, InternalException;
-
-    /**
-     * Identifies the provider term for a network interface.
-     * @param locale the locale in which the term should be provided
-     * @return a localized term for "network interface" specific to this cloud provider
-     * @deprecated use {@link VLANCapabilities#getProviderTermForNetworkInterface(java.util.Locale)}
-     */
-    @Deprecated
-    public @Nonnull String getProviderTermForNetworkInterface(@Nonnull Locale locale);
-
-    @Deprecated
-    public @Nonnull String getProviderTermForSubnet(@Nonnull Locale locale);
-
-    @Deprecated
-    public @Nonnull String getProviderTermForVlan(@Nonnull Locale locale);
-
-    /**
      * Fetches the network interfaced specified by the unique network interface ID.
      * @param nicId the unique ID of the desired network interface
      * @return the network interface that matches the specified ID
@@ -315,16 +233,6 @@ public interface VLANSupport extends AccessControlledService {
      * @throws OperationNotSupportedException the cloud does not support subnets
      */
     public @Nullable RoutingTable getRoutingTableForSubnet(@Nonnull String subnetId) throws CloudException, InternalException;
-
-    /**
-     * Indicates whether or not you may or must manage routing tables for your VLANs/subnets.
-     * @return the level of routing table management that is required
-     * @throws CloudException an error occurred in the cloud provider determining support
-     * @throws InternalException a local error occurred processing the request
-     * @deprecated use {@link VLANCapabilities#getRoutingTableSupport()}
-     */
-    @Deprecated
-    public @Nonnull Requirement getRoutingTableSupport() throws CloudException, InternalException;
 
     /**
      * Identifies the routing table that supports the routes for the VLAN (when subnets are not supported) or the
@@ -347,31 +255,7 @@ public interface VLANSupport extends AccessControlledService {
 
     public @Nullable Subnet getSubnet(@Nonnull String subnetId) throws CloudException, InternalException;
 
-    /**
-     * Indicates whether subnets in VLANs are required, optional, or not supported.
-     * @return the level of support for subnets in this cloud
-     * @throws CloudException an error occurred in the cloud while determining the support level
-     * @throws InternalException a local error occurred determining subnet support level
-     * @deprecated use {@link VLANCapabilities#getSubnetSupport()}
-     */
-    @Deprecated
-    public @Nonnull Requirement getSubnetSupport() throws CloudException, InternalException;
-
     public @Nullable VLAN getVlan(@Nonnull String vlanId) throws CloudException, InternalException;
-
-    /**
-     * Indicates whether or not you must specify a data center when provisioning your subnet. If {@link Requirement#NONE},
-     * then the cloud has no support for data centers and/or subnets or it lacks the ability to provision subnets in
-     * specific data centers. {@link Requirement#OPTIONAL} means that the cloud supports both and you may or may not
-     * specify a data center. No cloud should ever return {@link Requirement#REQUIRED}. Even if the cloud requires it,
-     * the Dasein Cloud implementation should pick on the client's request when none is specified.
-     * @return the requirements for specifying a data center when provisioning a subnet
-     * @throws CloudException an error occurred with the cloud provider determining support for this functionality
-     * @throws InternalException a local error occurred determining support for this functionality
-     * @deprecated use {@link VLANCapabilities#identifySubnetDCRequirement()}
-     */
-    @Deprecated
-    public @Nonnull Requirement identifySubnetDCRequirement() throws CloudException, InternalException;
 
     /**
      * Indicates whether or not the specified VLAN is connected to the public Internet via an Internet Gateway. A false
@@ -411,12 +295,6 @@ public interface VLANSupport extends AccessControlledService {
     public boolean isNetworkInterfaceSupportEnabled() throws CloudException, InternalException;
 
     public boolean isSubscribed() throws CloudException, InternalException;
-
-    @Deprecated
-    public boolean isSubnetDataCenterConstrained() throws CloudException, InternalException;
-
-    @Deprecated
-    public boolean isVlanDataCenterConstrained() throws CloudException, InternalException;
 
     /**
      * Lists the IDs of the firewalls protecting the specified network interface.
@@ -499,17 +377,6 @@ public interface VLANSupport extends AccessControlledService {
     public @Nonnull Iterable<RoutingTable> listRoutingTablesForSubnet(@Nonnull String subnetId) throws CloudException, InternalException;
 
     /**
-     * Lists all routing tables associated with the specified VLAN. 
-     * @param vlanId the VLAN ID whose routing tables are being sought
-     * @return a list of routing tables for the specified VLAN
-     * @throws CloudException an error occurred fetching the routing tables from the cloud provider
-     * @throws InternalException a local error occurred processing the routing tables
-     * @deprecated use {@link #listRoutingTablesForVlan(String)}
-     */
-    @Deprecated
-    public @Nonnull Iterable<RoutingTable> listRoutingTables(@Nonnull String vlanId) throws CloudException, InternalException;
-
-    /**
      * Lists all routing tables associated with the specified VLAN.
      * @param vlanId the VLAN ID whose routing tables are being sought
      * @return a list of routing tables for the specified VLAN
@@ -526,16 +393,6 @@ public interface VLANSupport extends AccessControlledService {
      * @throws InternalException a local error occurred processing the subnets
      */
     public @Nonnull Iterable<Subnet> listSubnets(@Nullable String vlanId) throws CloudException, InternalException;
-
-    /**
-     * Lists all IP protocol versions supported for VLANs in this cloud.
-     * @return a list of supported versions
-     * @throws CloudException an error occurred checking support for IP versions with the cloud provider
-     * @throws InternalException a local error occurred preparing the supported version
-     * @deprecated use {@link VLANCapabilities#listSupportedIPVersions()}
-     */
-    @Deprecated
-    public @Nonnull Iterable<IPVersion> listSupportedIPVersions() throws CloudException, InternalException;
 
     /**
      * Lists the status of all VLANs in the current region.
@@ -726,27 +583,6 @@ public interface VLANSupport extends AccessControlledService {
      * @throws InternalException an error occurred within the Dasein Cloud API implementation
      */
     public void removeVLANTags(@Nonnull String[] vlanIds, @Nonnull Tag ... tags) throws CloudException, InternalException;
-
-    /**
-     * Indicates whether or not this cloud allows enabling of internet gateways for VLANs. This is not relevant if all VLANs are Internet
-     * routable or if they simply cannot be made routable.
-     * @return true if this cloud supports the optional enablement of Internet gateways for VLANS, false if all VLANs are either always or never Internet routable
-     * @throws CloudException an error occurred determining this capability from the cloud provider
-     * @throws InternalException a local error occurred determining this capability
-     * @deprecated use {@link VLANCapabilities#supportsInternetGatewayCreation()}
-     */
-    @Deprecated
-    public boolean supportsInternetGatewayCreation() throws CloudException, InternalException;
-
-    /**
-     * Indicates whether you can specify a raw IP address as a target for your routing table.
-     * @return true if you can specify raw addresses, false if you need to specify other resources
-     * @throws CloudException an error occurred identifying support
-     * @throws InternalException a local error occurred identifying support
-     * @deprecated use {@link VLANCapabilities#supportsRawAddressRouting()}
-     */
-    @Deprecated
-    public boolean supportsRawAddressRouting() throws CloudException, InternalException;
 
     /**
      * Updates meta-data for a subnet with the new values. It will not overwrite any value that currently
