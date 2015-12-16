@@ -19,15 +19,7 @@
 
 package org.dasein.cloud.network;
 
-import org.dasein.cloud.AbstractProviderService;
-import org.dasein.cloud.CloudException;
-import org.dasein.cloud.CloudProvider;
-import org.dasein.cloud.InternalException;
-import org.dasein.cloud.OperationNotSupportedException;
-import org.dasein.cloud.ProviderContext;
-import org.dasein.cloud.Requirement;
-import org.dasein.cloud.ResourceStatus;
-import org.dasein.cloud.Tag;
+import org.dasein.cloud.*;
 import org.dasein.cloud.identity.ServiceAction;
 import org.dasein.cloud.util.TagUtils;
 
@@ -129,7 +121,7 @@ public abstract class AbstractLoadBalancerSupport<T extends CloudProvider> exten
         LoadBalancer lb = getLoadBalancer(forLoadBalancerId);
 
         if( lb == null ) {
-            throw new CloudException("No such load balancer: " + forLoadBalancerId);
+            throw new ResourceNotFoundException("No such load balancer: " + forLoadBalancerId);
         }
         @SuppressWarnings("deprecation") String[] ids = lb.getProviderServerIds();
 

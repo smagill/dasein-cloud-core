@@ -30,11 +30,7 @@ import java.util.Locale;
 import java.util.concurrent.Callable;
 
 import org.apache.commons.codec.binary.Base64;
-import org.dasein.cloud.AbstractProviderService;
-import org.dasein.cloud.CloudException;
-import org.dasein.cloud.CloudProvider;
-import org.dasein.cloud.InternalException;
-import org.dasein.cloud.Tag;
+import org.dasein.cloud.*;
 import org.dasein.cloud.util.NamingConstraints;
 import org.dasein.cloud.util.TagUtils;
 import org.dasein.util.Retry;
@@ -95,11 +91,12 @@ public abstract class AbstractBlobStoreSupport<T extends CloudProvider> extends 
 
     protected void copy(@Nullable String sourceBucket, @Nullable String sourceObject, @Nullable String targetBucket, @Nullable String targetObject) throws InternalException, CloudException {
         if( sourceObject == null ) {
-            if( targetBucket == null && !allowsRootObjects() ) {
-                throw new CloudException("Cannot place objects in the root");
+            if( targetBucket == null && !getCapabilities().allowsRootObjects() ) {
+                //todo should we have another exception for invalid parameters
+                throw new InternalException("Cannot place objects in the root");
             }
             if( targetBucket != null && targetBucket.equalsIgnoreCase(sourceBucket) ) {
-                throw new CloudException("Cannot copy in place");
+                throw new InternalException("Cannot copy in place");
             }
             if( targetBucket != null && !exists(targetBucket) ) {
                 createBucket(targetBucket, false);
@@ -171,11 +168,11 @@ public abstract class AbstractBlobStoreSupport<T extends CloudProvider> extends 
         Storage<org.dasein.util.uom.storage.Byte> bytes = getObjectSize(bucketName, objectName);
 
         if( bytes == null ) {
-            throw new CloudException("File does not exist");
+            throw new ResourceNotFoundException("File does not exist");
         }
         transfer.setBytesToTransfer(bytes.getQuantity().intValue());
         if( transfer.getBytesToTransfer() == -1L ) {
-            throw new CloudException("No such file: " + ((bucketName == null ? "/" : "/" + bucketName) + "/" + objectName));
+            throw new ResourceNotFoundException("No such file: " + ((bucketName == null ? "/" : "/" + bucketName) + "/" + objectName));
         }
         Thread t = new Thread() {
             public void run() {

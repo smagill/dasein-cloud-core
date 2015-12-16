@@ -25,8 +25,10 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
+import org.dasein.cloud.CloudErrorType;
 import org.dasein.cloud.CloudException;
 import org.dasein.cloud.CloudProvider;
+import org.dasein.cloud.GeneralCloudException;
 
 import java.util.Properties;
 
@@ -71,9 +73,10 @@ public abstract class AbstractDaseinRequestExecutor<T> {
     protected CloudException translateException(Exception exception) {
         if(exception instanceof  CloudResponseException) {
             CloudResponseException e = (CloudResponseException) exception;
-            return new CloudException(e.getErrorType(), e.getHttpCode(), e.getProviderCode(), e.getMessage());
+            //todo is GeneralCloudException right here?
+            return new GeneralCloudException(e.getErrorType(), e.getHttpCode(), e.getProviderCode(), e.getMessage());
         } else {
-            return new CloudException(exception.getMessage());
+            return new GeneralCloudException(exception.getMessage(), CloudErrorType.GENERAL);
         }
     }
 

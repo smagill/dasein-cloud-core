@@ -19,15 +19,7 @@
 
 package org.dasein.cloud.compute;
 
-import org.dasein.cloud.AbstractProviderService;
-import org.dasein.cloud.CloudException;
-import org.dasein.cloud.CloudProvider;
-import org.dasein.cloud.InternalException;
-import org.dasein.cloud.OperationNotSupportedException;
-import org.dasein.cloud.ProviderContext;
-import org.dasein.cloud.Requirement;
-import org.dasein.cloud.ResourceStatus;
-import org.dasein.cloud.Tag;
+import org.dasein.cloud.*;
 import org.dasein.cloud.identity.ServiceAction;
 import org.dasein.cloud.util.*;
 import org.dasein.util.CalendarWrapper;
@@ -592,7 +584,7 @@ public abstract class AbstractVMSupport<T extends CloudProvider> extends Abstrac
         VirtualMachine vm = getVirtualMachine(vmId);
 
         if( vm == null ) {
-            throw new CloudException("No such virtual machine: " + vmId);
+            throw new ResourceNotFoundException("No such virtual machine: " + vmId);
         }
         stop(vmId);
         long timeout = System.currentTimeMillis() + ( CalendarWrapper.MINUTE * 5L );

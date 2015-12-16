@@ -19,16 +19,7 @@
 
 package org.dasein.cloud.compute;
 
-import org.dasein.cloud.AbstractProviderService;
-import org.dasein.cloud.AsynchronousTask;
-import org.dasein.cloud.CloudException;
-import org.dasein.cloud.CloudProvider;
-import org.dasein.cloud.InternalException;
-import org.dasein.cloud.OperationNotSupportedException;
-import org.dasein.cloud.ProviderContext;
-import org.dasein.cloud.Requirement;
-import org.dasein.cloud.ResourceStatus;
-import org.dasein.cloud.Tag;
+import org.dasein.cloud.*;
 import org.dasein.cloud.identity.ServiceAction;
 import org.dasein.cloud.util.TagUtils;
 
@@ -201,17 +192,17 @@ public abstract class AbstractImageSupport<T extends CloudProvider> extends Abst
         ComputeServices services = getProvider().getComputeServices();
 
         if( services == null ) {
-            throw new CloudException("No virtual machine " + vmId + " exists to image in this cloud");
+            throw new InternalException("No ComputeServices exists to image in this cloud");
         }
         VirtualMachineSupport support = services.getVirtualMachineSupport();
 
         if( support == null ) {
-            throw new CloudException("No virtual machine " + vmId + " exists to image in this cloud");
+            throw new InternalException("No VirtualMachineSupport exists to image in this cloud");
         }
         VirtualMachine vm = support.getVirtualMachine(vmId);
 
         if( vm == null ) {
-            throw new CloudException("No virtual machine " + vmId + " exists to image in this cloud");
+            throw new ResourceNotFoundException("No virtual machine " + vmId + " exists to image in this cloud");
         }
 
         final ImageCreateOptions options = ImageCreateOptions.getInstance(vm, name, description);
