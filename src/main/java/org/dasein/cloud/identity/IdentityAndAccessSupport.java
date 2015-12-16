@@ -239,6 +239,7 @@ public interface IdentityAndAccessSupport extends AccessControlledService {
     /**
      * Lists all users assigned to a managed policy
      * @param providerPolicyId the ID of the managed policy for which associated users are returned
+     * @return all matching users
      * @throws CloudException an error occurred with the cloud provider while performing the search
      * @throws InternalException an error occurred within the Dasein Cloud implementation while performing the search
      */
@@ -247,6 +248,7 @@ public interface IdentityAndAccessSupport extends AccessControlledService {
     /**
      * Lists all groups assigned to a managed policy
      * @param providerPolicyId the ID of the managed policy for which associated groups are returned
+     * @return all matching groups
      * @throws CloudException an error occurred with the cloud provider while performing the search
      * @throws InternalException an error occurred within the Dasein Cloud implementation while performing the search
      */

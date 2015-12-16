@@ -184,7 +184,7 @@ public interface ImageCapabilities extends Capabilities{
 
     /**
      * Indicates whether a library of public images of the specified class should be expected. If true,
-     * {@link MachineImageSupport#listImages(ImageClass)} should provide a non-empty list of that type.
+     * {@link MachineImageSupport#listImages(ImageFilterOptions)} should provide a non-empty list of that type.
      * @param cls the image class of the images being checked
      * @return true if a public image library exists
      * @throws CloudException an error occurred with the cloud provider

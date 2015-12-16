@@ -42,7 +42,7 @@ import javax.annotation.Nullable;
  * </ul>
  * <p>
  *     A cloud may indicate which kinds of images are necessary for the instantiation of a virtual machine via the
- *     meta-data call {@link VirtualMachineSupport#identifyImageRequirement(ImageClass)}. In practice, just about every
+ *     meta-data call {@link VirtualMachineCapabilities#identifyImageRequirement(ImageClass)}. In practice, just about every
  *     cloud (if not every cloud) requires a &quot;machine&quot; image and a few clouds optionally allow you to specify
  *     &quot;ramdisk&quot; and/or &quot;kernel&quot; images.
  * </p>

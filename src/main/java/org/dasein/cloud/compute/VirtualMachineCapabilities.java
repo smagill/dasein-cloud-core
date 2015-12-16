@@ -37,7 +37,9 @@ import java.util.Locale;
 public interface VirtualMachineCapabilities extends Capabilities {
     /**
      * Indicates whether or not a virtual machine in the specified state can be the target of
-     * an {@link VirtualMachineSupport#alterVirtualMachine(String, VMScalingOptions)} call.
+     * an {@link VirtualMachineSupport#alterVirtualMachineSize(String, String, String)},
+     * {@link VirtualMachineSupport#alterVirtualMachineFirewalls(String, String[])} , or
+     * {@link VirtualMachineSupport#alterVirtualMachineProduct(String, String)}, call.
      * @param fromState the state in which the theoretical virtual machine exists
      * @return true if such a virtual machine may be altered, false otherwise
      * @throws CloudException the cloud provider encountered an error while processing the request

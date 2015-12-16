@@ -75,6 +75,7 @@ public class VMScalingCapabilities {
      * {@link VolumeSupport#attach(String, String, String)} method. If it is required, however, you use
      * {@link VirtualMachineSupport#alterVirtualMachine(String, VMScalingOptions)}.
      * @return the requirement for handling new volumes as an alter VM operation
+     * @deprecated use {@link VolumeCapabilities#requiresVMOnCreate()}
      */
     @Deprecated
     public @Nonnull Requirement getAlterVmForNewVolume() {
@@ -86,6 +87,7 @@ public class VMScalingCapabilities {
      * {@link Requirement#NONE}, then either you cannot resize volumes or you must do that through mechanisms other
      * than {@link VirtualMachineSupport#alterVirtualMachine(String, VMScalingOptions)}.
      * @return the requirement for handling volume resizing as an alter VM operation
+     * @deprecated there is no alternative to this method
      */
     @Deprecated
     public @Nonnull Requirement getAlterVmForVolumeChange() {
