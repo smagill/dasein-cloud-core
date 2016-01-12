@@ -19,13 +19,16 @@
 
 package org.dasein.cloud.network;
 
-import org.dasein.cloud.*;
+import org.dasein.cloud.AccessControlledService;
+import org.dasein.cloud.CloudException;
+import org.dasein.cloud.InternalException;
+import org.dasein.cloud.OperationNotSupportedException;
+import org.dasein.cloud.ResourceStatus;
+import org.dasein.cloud.Tag;
 import org.dasein.cloud.identity.ServiceAction;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
-import java.util.Locale;
 
 /**
  * @version 2013.02 added listResources(String) (issue #24)
@@ -285,14 +288,6 @@ public interface VLANSupport extends AccessControlledService {
      * @throws InternalException a local error occurred
      */
     public @Nullable InternetGateway getInternetGatewayById(@Nonnull String gatewayId) throws CloudException, InternalException;
-
-    /**
-     * Indicates whether or not this cloud included the concept of network interfaces in its networking support.
-     * @return true if this cloud supports network interfaces as part of its networking concepts
-     * @throws CloudException an error occurred with the cloud provider determining support for network interfaces
-     * @throws InternalException a local error occurred determining support for network interfaces
-     */
-    public boolean isNetworkInterfaceSupportEnabled() throws CloudException, InternalException;
 
     public boolean isSubscribed() throws CloudException, InternalException;
 
