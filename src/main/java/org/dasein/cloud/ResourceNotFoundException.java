@@ -20,16 +20,14 @@ public class ResourceNotFoundException extends CloudException {
         this.errorType = CloudErrorType.RESOURCE_NOT_FOUND;
     }
 
-    public ResourceNotFoundException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
+    public ResourceNotFoundException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
         super(msg);
-        this.errorType = type;
         this.httpCode = httpCode;
         this.providerCode = providerCode;
     }
 
-    public ResourceNotFoundException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
+    public ResourceNotFoundException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
         super(msg, cause);
-        this.errorType = type;
         this.httpCode = httpCode;
         this.providerCode = providerCode;
     }

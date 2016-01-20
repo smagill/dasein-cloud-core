@@ -32,14 +32,12 @@ public class AuthenticationException extends CloudException {
 
     /**
      * Constructs a cloud exception with cloud provider data added in
-     * @param type cloud error type
      * @param httpCode the HTTP error code
      * @param providerCode the provider-specific error code
      * @param msg the error message
      */
-    public AuthenticationException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
+    public AuthenticationException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
         super(msg);
-        this.errorType = type;
         this.httpCode = httpCode;
         this.providerCode = providerCode;
         if (httpCode == HttpStatus.SC_FORBIDDEN) {
@@ -52,15 +50,13 @@ public class AuthenticationException extends CloudException {
 
     /**
      * Constructs a cloud exception with cloud provider data added in
-     * @param type cloud error type
      * @param httpCode the HTTP error code
      * @param providerCode the provider-specific error code
      * @param msg the error message
      * @param cause the error that caused this exception to be thrown
      */
-    public AuthenticationException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
+    public AuthenticationException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
         super(msg, cause);
-        this.errorType = type;
         this.httpCode = httpCode;
         this.providerCode = providerCode;
         if (httpCode == HttpStatus.SC_FORBIDDEN) {

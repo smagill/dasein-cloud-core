@@ -20,16 +20,14 @@ public class TaskInProgressException extends CloudException {
         this.errorType = CloudErrorType.TASK_IN_PROGRESS;
     }
 
-    public TaskInProgressException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
+    public TaskInProgressException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
         super(msg);
-        this.errorType = type;
         this.httpCode = httpCode;
         this.providerCode = providerCode;
     }
 
-    public TaskInProgressException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
+    public TaskInProgressException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
         super(msg, cause);
-        this.errorType = type;
         this.httpCode = httpCode;
         this.providerCode = providerCode;
     }

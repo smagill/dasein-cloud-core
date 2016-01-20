@@ -21,16 +21,14 @@ public class InvalidStateException extends CloudException {
         this.errorType = CloudErrorType.INVALID_STATE;
     }
 
-    public InvalidStateException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
+    public InvalidStateException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
         super(msg);
-        this.errorType = type;
         this.httpCode = httpCode;
         this.providerCode = providerCode;
     }
 
-    public InvalidStateException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
+    public InvalidStateException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
         super(msg, cause);
-        this.errorType = type;
         this.httpCode = httpCode;
         this.providerCode = providerCode;
     }
