@@ -202,7 +202,7 @@ public abstract class AbstractImageSupport<T extends CloudProvider> extends Abst
         VirtualMachine vm = support.getVirtualMachine(vmId);
 
         if( vm == null ) {
-            throw new ResourceNotFoundException("No virtual machine " + vmId + " exists to image in this cloud");
+            throw new ResourceNotFoundException("Virtual machine", vmId);
         }
 
         final ImageCreateOptions options = ImageCreateOptions.getInstance(vm, name, description);

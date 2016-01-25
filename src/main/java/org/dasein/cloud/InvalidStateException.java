@@ -1,8 +1,6 @@
 package org.dasein.cloud;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * An error which has been caused by the resource being in an incompatible state for the operation
@@ -19,22 +17,5 @@ public class InvalidStateException extends CloudException {
     public InvalidStateException(@Nonnull String msg, @Nonnull Throwable cause) {
         super(msg, cause);
         this.errorType = CloudErrorType.INVALID_STATE;
-    }
-
-    public InvalidStateException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
-        super(msg);
-        this.httpCode = httpCode;
-        this.providerCode = providerCode;
-    }
-
-    public InvalidStateException(@Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
-        super(msg, cause);
-        this.httpCode = httpCode;
-        this.providerCode = providerCode;
-    }
-
-    @Nonnull
-    public CloudErrorType getErrorType() {
-        return (errorType == null ? CloudErrorType.GENERAL : errorType);
     }
 }

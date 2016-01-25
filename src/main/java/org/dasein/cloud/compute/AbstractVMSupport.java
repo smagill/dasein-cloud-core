@@ -19,9 +19,19 @@
 
 package org.dasein.cloud.compute;
 
-import org.dasein.cloud.*;
+import org.dasein.cloud.AbstractProviderService;
+import org.dasein.cloud.CloudException;
+import org.dasein.cloud.CloudProvider;
+import org.dasein.cloud.InternalException;
+import org.dasein.cloud.OperationNotSupportedException;
+import org.dasein.cloud.ProviderContext;
+import org.dasein.cloud.Requirement;
+import org.dasein.cloud.ResourceNotFoundException;
+import org.dasein.cloud.ResourceStatus;
+import org.dasein.cloud.Tag;
 import org.dasein.cloud.identity.ServiceAction;
-import org.dasein.cloud.util.*;
+import org.dasein.cloud.util.NamingConstraints;
+import org.dasein.cloud.util.TagUtils;
 import org.dasein.util.CalendarWrapper;
 import org.dasein.util.Jiterator;
 import org.dasein.util.JiteratorPopulator;
@@ -29,8 +39,6 @@ import org.dasein.util.PopulatorThread;
 import org.dasein.util.uom.storage.Gigabyte;
 import org.dasein.util.uom.storage.Megabyte;
 import org.dasein.util.uom.storage.Storage;
-import org.dasein.util.uom.time.Day;
-import org.dasein.util.uom.time.TimePeriod;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,11 +46,13 @@ import org.json.JSONObject;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -584,7 +594,7 @@ public abstract class AbstractVMSupport<T extends CloudProvider> extends Abstrac
         VirtualMachine vm = getVirtualMachine(vmId);
 
         if( vm == null ) {
-            throw new ResourceNotFoundException("No such virtual machine: " + vmId);
+            throw new ResourceNotFoundException("Virtual machine: ", vmId);
         }
         stop(vmId);
         long timeout = System.currentTimeMillis() + ( CalendarWrapper.MINUTE * 5L );

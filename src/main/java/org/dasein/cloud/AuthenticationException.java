@@ -80,8 +80,4 @@ public class AuthenticationException extends CloudException {
     public AuthenticationFaultType getAuthFaultType() {
         return authFaultType;
     }
-
-    public @Nonnull CloudErrorType getErrorType() {
-        return (errorType == null ? CloudErrorType.AUTHENTICATION : errorType);
-    }
 }

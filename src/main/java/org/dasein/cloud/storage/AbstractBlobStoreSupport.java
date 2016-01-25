@@ -19,6 +19,21 @@
 
 package org.dasein.cloud.storage;
 
+import org.apache.commons.codec.binary.Base64;
+import org.dasein.cloud.AbstractProviderService;
+import org.dasein.cloud.CloudException;
+import org.dasein.cloud.CloudProvider;
+import org.dasein.cloud.InternalException;
+import org.dasein.cloud.ResourceNotFoundException;
+import org.dasein.cloud.Tag;
+import org.dasein.cloud.util.NamingConstraints;
+import org.dasein.cloud.util.TagUtils;
+import org.dasein.util.Retry;
+import org.dasein.util.uom.storage.Byte;
+import org.dasein.util.uom.storage.Storage;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -28,17 +43,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 import java.util.concurrent.Callable;
-
-import org.apache.commons.codec.binary.Base64;
-import org.dasein.cloud.*;
-import org.dasein.cloud.util.NamingConstraints;
-import org.dasein.cloud.util.TagUtils;
-import org.dasein.util.Retry;
-import org.dasein.util.uom.storage.*;
-import org.dasein.util.uom.storage.Byte;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public abstract class AbstractBlobStoreSupport<T extends CloudProvider> extends AbstractProviderService<T> implements BlobStoreSupport {
 
@@ -168,11 +172,11 @@ public abstract class AbstractBlobStoreSupport<T extends CloudProvider> extends 
         Storage<org.dasein.util.uom.storage.Byte> bytes = getObjectSize(bucketName, objectName);
 
         if( bytes == null ) {
-            throw new ResourceNotFoundException("File does not exist");
+            throw new ResourceNotFoundException("File", bucketName+"/"+objectName);
         }
         transfer.setBytesToTransfer(bytes.getQuantity().intValue());
         if( transfer.getBytesToTransfer() == -1L ) {
-            throw new ResourceNotFoundException("No such file: " + ((bucketName == null ? "/" : "/" + bucketName) + "/" + objectName));
+            throw new ResourceNotFoundException("File", ((bucketName == null ? "/" : "/" + bucketName) + "/" + objectName));
         }
         Thread t = new Thread() {
             public void run() {

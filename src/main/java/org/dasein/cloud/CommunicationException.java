@@ -31,9 +31,4 @@ public class CommunicationException extends CloudException {
         this.httpCode = httpCode;
         this.providerCode = providerCode;
     }
-
-    @Nonnull
-    public CloudErrorType getErrorType() {
-            return (errorType == null ? CloudErrorType.COMMUNICATION : errorType);
-        }
 }
