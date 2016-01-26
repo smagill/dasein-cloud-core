@@ -313,6 +313,17 @@
 
     <developers>
         <developer>
+            <name>Drew Lyall</name>
+            <id>drewlyall</id>
+            <email>drew_lyall -at- dell -dot- com</email>
+            <organization>Dell</organization>
+            <roles>
+                <role>Java Developer</role>
+            </roles>
+            <url>http://software.dell.com</url>
+            <timezone>0</timezone>
+        </developer>
+        <developer>
             <name>George Reese</name>
             <id>georgereese</id>
             <email>george_reese -at- dell -dot- com</email>
