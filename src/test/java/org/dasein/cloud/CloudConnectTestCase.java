@@ -59,6 +59,7 @@ public class CloudConnectTestCase {
     static public final ProviderContext.Value<String>   VERSION = new ProviderContext.Value<String>("version", "1");
     static public final ProviderContext.Value<byte[][]> X509    = new ProviderContext.Value<byte[][]>("x509", new byte[][] { "x509c".getBytes(), "x509k".getBytes() });
 
+    /*
     private Cloud  newCloud;
     private String cloudName;
     private String effectiveAccountNumber;
@@ -84,8 +85,9 @@ public class CloudConnectTestCase {
 
     }
 
-    /********************************** NEW IMPLEMENTATION, OLD CLIENT **********************************/
 
+    /********************************** NEW IMPLEMENTATION, OLD CLIENT **********************************/
+    /*
     @SuppressWarnings("deprecation")
     private void checkConnectionIntegrityForOldClientMethods(@Nullable ProviderContext ctx) {
         assertNotNull("The context resulting from context creation may not be null", ctx);
@@ -524,4 +526,5 @@ public class CloudConnectTestCase {
 
         assertNull("The default context test in the test provider should always return null", p.testContext());
     }
+    */
 }

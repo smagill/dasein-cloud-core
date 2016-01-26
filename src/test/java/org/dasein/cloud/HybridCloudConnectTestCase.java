@@ -29,6 +29,7 @@ import org.junit.Test;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import static org.junit.Assert.*;
@@ -52,6 +53,7 @@ public class HybridCloudConnectTestCase {
     static public final ProviderContext.Value<String>   VERSION = new ProviderContext.Value<String>("version", "1");
     static public final ProviderContext.Value<byte[][]> X509    = new ProviderContext.Value<byte[][]>("x509", new byte[][] { "x509c".getBytes(), "x509k".getBytes() });
 
+    /*
     static private class Config {
         private String cloudName;
         private String effectiveAccountNumber;
@@ -86,6 +88,7 @@ public class HybridCloudConnectTestCase {
 
     /********************************** NEW IMPLEMENTATION, OLD CLIENT **********************************/
 
+    /*
     @SuppressWarnings("deprecation")
     private void checkConnectionIntegrityForOldClientMethods(@Nullable ProviderContext ctx, @Nonnull Config cfg, boolean cTest) {
         assertNotNull("The context resulting from context creation may not be null", ctx);
@@ -96,28 +99,33 @@ public class HybridCloudConnectTestCase {
 
         assertNotNull("No public key was found in the provider context", b);
         assertNotNull("No private key was found in the provider context", v);
-        String pub = new String(b);
-        String priv = new String(v);
+        try{
+            String pub = new String(b, "utf-8");
+            String priv = new String(v, "utf-8");
 
-        if( cTest ) {
-            assertEquals("Public key is not public", "public", pub);
-            assertEquals("Private key is not private", "private", priv);
+            if( cTest ) {
+                assertEquals("Public key is not public", "public", pub);
+                assertEquals("Private key is not private", "private", priv);
+            }
+            else {
+                assertEquals("Public key is not public", "spub", pub);
+                assertEquals("Private key is not private", "spriv", priv);
+            }
+
+            b = ctx.getX509Cert();
+            v = ctx.getX509Key();
+            if( cTest ) {
+                assertNotNull("No X509 cert was found in the provider context", b);
+                assertNotNull("No X509 key was found in the provider context", v);
+                pub = new String(b);
+                priv = new String(v);
+
+                assertEquals("X509 certificate is not public", "x509c", pub);
+                assertEquals("X509 key is not private", "x509k", priv);
+            }
         }
-        else {
-            assertEquals("Public key is not public", "spub", pub);
-            assertEquals("Private key is not private", "spriv", priv);
-        }
-
-        b = ctx.getX509Cert();
-        v = ctx.getX509Key();
-        if( cTest ) {
-            assertNotNull("No X509 cert was found in the provider context", b);
-            assertNotNull("No X509 key was found in the provider context", v);
-            pub = new String(b);
-            priv = new String(v);
-
-            assertEquals("X509 certificate is not public", "x509c", pub);
-            assertEquals("X509 key is not private", "x509k", priv);
+        catch(UnsupportedEncodingException ex){
+            ex.printStackTrace();
         }
         if( cTest ) {
             Properties props = ctx.getCustomProperties();
@@ -636,4 +644,5 @@ public class HybridCloudConnectTestCase {
         catch( InterruptedException e ) { }
         assertFalse("Compute cloud provider was not properly closed after release", cp.isConnected());
     }
+    */
 }
