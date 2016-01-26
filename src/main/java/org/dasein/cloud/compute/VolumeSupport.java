@@ -208,7 +208,7 @@ public interface VolumeSupport extends AccessControlledService {
 
     /**
      * Lists the set of volume products that may be used in provisioning a block storage volume. Because not all clouds
-     * support the concept of volume products (as indicated by {@link #getVolumeProductRequirement()}, this method should
+     * support the concept of volume products (as indicated by {@link VolumeCapabilities#getVolumeProductRequirement()}, this method should
      * return an empty list in such clouds.
      * @return the list of products that may be used to provision volumes
      * @throws InternalException an error occurred within the Dasein Cloud implementation assembling the list

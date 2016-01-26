@@ -68,22 +68,6 @@ public interface DataCenterServices {
     public @Nullable DataCenter getDataCenter(@Nonnull String providerDataCenterId) throws InternalException, CloudException;
 
     /**
-     * Provides the cloud-specific term for a data center (e.g. "availability zone").
-     * @param locale the locale into which the term should be translated
-     * @return the term for a data center
-     */
-    @Deprecated
-    public String getProviderTermForDataCenter(Locale locale);
-    
-    /**
-     * Provides the cloud-specific term for a region.
-     * @param locale the locale into which the term should be translated
-     * @return the term for a region
-     */
-    @Deprecated
-    public String getProviderTermForRegion(Locale locale);
-    
-    /**
      * Provides the region matching the specified region ID.
      * @param providerRegionId the provider-specified unique ID that identifies a region for the provider
      * @return the current state of the desired region

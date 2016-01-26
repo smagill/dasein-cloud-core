@@ -71,16 +71,6 @@ public class TestNewCloudProvider extends AbstractCloud {
             }
 
             @Override
-            public String getProviderTermForDataCenter(Locale locale) {
-                return "data center";
-            }
-
-            @Override
-            public String getProviderTermForRegion(Locale locale) {
-                return "region";
-            }
-
-            @Override
             public Region getRegion(String providerRegionId) throws InternalException, CloudException {
                 return null;
             }

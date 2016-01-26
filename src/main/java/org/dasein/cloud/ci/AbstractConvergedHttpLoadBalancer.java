@@ -24,11 +24,7 @@ import java.util.ArrayList;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.dasein.cloud.CloudException;
-import org.dasein.cloud.CloudProvider;
-import org.dasein.cloud.InternalException;
-import org.dasein.cloud.ProviderContext;
-import org.dasein.cloud.ResourceStatus;
+import org.dasein.cloud.*;
 
 public abstract class AbstractConvergedHttpLoadBalancer<T extends CloudProvider> implements ConvergedHttpLoadBalancerSupport {
     private T provider;
@@ -41,33 +37,33 @@ public abstract class AbstractConvergedHttpLoadBalancer<T extends CloudProvider>
         return provider;
     }
 
-    protected final @Nonnull ProviderContext getContext() throws CloudException {
+    protected final @Nonnull ProviderContext getContext() throws InternalException {
         ProviderContext ctx = getProvider().getContext();
 
         if( ctx == null ) {
-            throw new CloudException("No context was specified for this request");
+            throw new InternalException("No context was specified for this request");
         }
         return ctx;
     }
 
     @Override
     public @Nullable ConvergedHttpLoadBalancer getConvergedHttpLoadBalancer(@Nonnull String convergedHttpLoadBalancerName) throws CloudException, InternalException {
-        throw new InternalException("Operation not supported for this cloud");
+        throw new OperationNotSupportedException("getConvergedHttpLoadBalancer not supported for "+getProvider().getCloudName());
     }
 
     @Override
     public @Nonnull Iterable<ResourceStatus> listConvergedHttpLoadBalancerStatus() throws InternalException, CloudException {
-        throw new InternalException("Operation not supported for this cloud");
+        throw new OperationNotSupportedException("listConvergedHttpLoadBalancerStatus not supported for "+getProvider().getCloudName());
     }
 
     @Override
     public String createConvergedHttpLoadBalancer(@Nonnull ConvergedHttpLoadBalancer withConvergedHttpLoadBalancerOptions) throws CloudException, InternalException {
-        throw new InternalException("Operation not supported for this cloud");
+        throw new OperationNotSupportedException("createConvergedHttpLoadBalancer not supported for "+getProvider().getCloudName());
     }
 
     @Override
     public void removeConvergedHttpLoadBalancers(@Nonnull String globalForwardingRuleName) throws CloudException, InternalException {
-        throw new InternalException("Operation not supported for this cloud");
+        throw new OperationNotSupportedException("removeConvergedHttpLoadBalancers not supported for "+getProvider().getCloudName());
     }
 
 }

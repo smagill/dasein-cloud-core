@@ -55,28 +55,6 @@ public abstract class AbstractDataCenterServices<T extends CloudProvider> extend
     }
 
     @Override
-    @Deprecated
-    public String getProviderTermForDataCenter(Locale locale) {
-        try {
-            return getCapabilities().getProviderTermForDataCenter(locale);
-        }
-        catch( Exception e ) {
-            throw new RuntimeException("Unable to access data center capabilities of " + getProvider().getCloudName(), e);
-        }
-    }
-
-    @Override
-    @Deprecated
-    public String getProviderTermForRegion(Locale locale) {
-        try {
-            return getCapabilities().getProviderTermForRegion(locale);
-        }
-        catch( Exception e ) {
-            throw new RuntimeException("Unable to access data center capabilities of " + getProvider().getCloudName(), e);
-        }
-    }
-
-    @Override
     public @Nonnull Iterable<DataCenter> listDataCenters(@Nonnull String providerRegionId) throws InternalException, CloudException {
         throw new OperationNotSupportedException("Listing data centers by region is not currently implemented for " + getProvider().getCloudName());
     }

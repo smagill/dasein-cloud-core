@@ -19,11 +19,7 @@
 
 package org.dasein.cloud.compute;
 
-import org.dasein.cloud.CloudException;
-import org.dasein.cloud.CloudProvider;
-import org.dasein.cloud.InternalException;
-import org.dasein.cloud.OperationNotSupportedException;
-import org.dasein.cloud.Requirement;
+import org.dasein.cloud.*;
 import org.dasein.cloud.dc.DataCenter;
 import org.dasein.util.uom.storage.Gigabyte;
 import org.dasein.util.uom.storage.Storage;
@@ -47,7 +43,7 @@ import java.util.Map;
  */
 public class VolumeCreateOptions {
     /**
-     * Provides options for creating a block volume of a specific size. Useful only when {@link VolumeSupport#getVolumeProductRequirement()}
+     * Provides options for creating a block volume of a specific size. Useful only when {@link VolumeCapabilities#getVolumeProductRequirement()}
      * is {@link Requirement#NONE} or {@link Requirement#OPTIONAL}.
      * @param size the size of the volume to be created (or to be resized to)
      * @param name the name of the new volume
@@ -60,7 +56,7 @@ public class VolumeCreateOptions {
 
     /**
      * Provides options for creating a block volume of a specific size based on a specific product. This method makes no sense
-     * when {@link VolumeSupport#getVolumeProductRequirement()}  is {@link Requirement#NONE}.
+     * when {@link VolumeCapabilities#getVolumeProductRequirement()}  is {@link Requirement#NONE}.
      * @param volumeProductId the ID of the volume product from {@link VolumeSupport#listVolumeProducts()} to use in creating the volume
      * @param size the size of the volume to be created (or to be resized to)
      * @param name the name of the new volume
@@ -73,7 +69,7 @@ public class VolumeCreateOptions {
     }
 
     /**
-     * Provides options for creating a network volume of a specific size. Useful only when {@link VolumeSupport#getVolumeProductRequirement()}
+     * Provides options for creating a network volume of a specific size. Useful only when {@link VolumeCapabilities#getVolumeProductRequirement()}
      * is {@link Requirement#NONE} or {@link Requirement#OPTIONAL}.
      * @param inVlanId the ID of the VLAN in which the network volume will be created
      * @param size the size of the volume to be created (or to be resized to)
@@ -91,7 +87,7 @@ public class VolumeCreateOptions {
 
     /**
      * Provides options for creating a network volume of a specific size based on a specific product. This method makes no sense
-     * when {@link VolumeSupport#getVolumeProductRequirement()} is {@link Requirement#NONE}.
+     * when {@link VolumeCapabilities#getVolumeProductRequirement()} is {@link Requirement#NONE}.
      * @param inVlanId the ID of the VLAN in which the network volume will be created
      * @param volumeProductId the ID of the volume product from {@link VolumeSupport#listVolumeProducts()} to use in creating the volume
      * @param size the size of the volume to be created (or to be resized to)
@@ -109,7 +105,7 @@ public class VolumeCreateOptions {
 
     /**
      * Provides options for creating a network volume of a specific size based on a specific product. This method makes no sense
-     * when {@link VolumeSupport#getVolumeProductRequirement()} is {@link Requirement#NONE}.
+     * when {@link VolumeCapabilities#getVolumeProductRequirement()} is {@link Requirement#NONE}.
      * @param inVlanId the ID of the VLAN in which the network volume will be created
      * @param volumeProductId the ID of the volume product from {@link VolumeSupport#listVolumeProducts()} to use in creating the volume
      * @param size the size of the volume to be created (or to be resized to)
@@ -128,7 +124,7 @@ public class VolumeCreateOptions {
 
     /**
      * Provides options for creating a block volume from a snapshot. This method makes no sense when {@link ComputeServices#getSnapshotSupport()}
-     * is <code>null</code>. Useful only when {@link VolumeSupport#getVolumeProductRequirement()}
+     * is <code>null</code>. Useful only when {@link VolumeCapabilities#getVolumeProductRequirement()}
      * is {@link Requirement#NONE} or {@link Requirement#OPTIONAL}.
      * @param snapshotId the ID of the snapshot from which the volume will be created
      * @param size the size of the volume to be created
@@ -142,7 +138,7 @@ public class VolumeCreateOptions {
 
     /**
      * Provides options for creating a block volume from a snapshot. This method makes no sense when {@link ComputeServices#getSnapshotSupport()}
-     * is <code>null</code>. Useful only when {@link VolumeSupport#getVolumeProductRequirement()} is <em>NOT</em>
+     * is <code>null</code>. Useful only when {@link VolumeCapabilities#getVolumeProductRequirement()} is <em>NOT</em>
      * {@link Requirement#NONE}.
      * @param volumeProductId the ID of the volume product from which the new volume will be created
      * @param snapshotId the ID of the snapshot from which the volume will be created
@@ -387,7 +383,7 @@ public class VolumeCreateOptions {
     /**
      * Indicates how the volume will be attached to a specific virtual machine on create.
      * @param vmId the unique ID of the {@link VirtualMachine} to which the new volume will be automatically attached after create
-     * @param asDeviceId the device ID (see {@link VolumeSupport#listPossibleDeviceIds(Platform)} for valid device IDs) under which it will be attached
+     * @param asDeviceId the device ID (see {@link VolumeCapabilities#listPossibleDeviceIds(Platform)} for valid device IDs) under which it will be attached
      * @return this
      */
     public @Nonnull VolumeCreateOptions withAttachment(@Nonnull String vmId, @Nonnull String asDeviceId) {

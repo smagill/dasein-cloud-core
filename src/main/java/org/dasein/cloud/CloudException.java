@@ -40,14 +40,14 @@ import javax.annotation.Nullable;
 public class CloudException extends Exception {
     private static final long serialVersionUID = -1975104091752615199L;
     
-    private CloudErrorType errorType;
-    private int            httpCode;
-    private String         providerCode;
+    protected CloudErrorType errorType;
+    protected int            httpCode;
+    protected String         providerCode;
     
     /**
      * Constructs an unlabeled exception.
      */
-    public CloudException() {
+    protected CloudException() {
         super();
     }
 
@@ -55,7 +55,7 @@ public class CloudException extends Exception {
      * Constructs a cloud exception with a specific error message.
      * @param msg the message for the error that occurred
      */
-    public CloudException(@Nonnull String msg) {
+    protected CloudException(@Nonnull String msg) {
         super(msg);
     }
     
@@ -63,7 +63,7 @@ public class CloudException extends Exception {
      * Constructs a cloud exception in response to a specific cause.
      * @param cause the error that caused this exception to be thrown
      */
-    public CloudException(@Nonnull Throwable cause) {
+    protected CloudException(@Nonnull Throwable cause) {
         super(cause);
     }
 
@@ -72,7 +72,7 @@ public class CloudException extends Exception {
      * @param msg the message for the error that occurred
      * @param cause the error that caused this exception to be thrown
      */
-    public CloudException(@Nonnull String msg, @Nonnull Throwable cause) {
+    protected CloudException(@Nonnull String msg, @Nonnull Throwable cause) {
         super(msg, cause);
     }
     
@@ -83,7 +83,7 @@ public class CloudException extends Exception {
      * @param providerCode the provider-specific error code
      * @param msg the error message
      */
-    public CloudException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
+    protected CloudException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
         super(msg);
         this.errorType = type;
         this.httpCode = httpCode;
@@ -98,7 +98,7 @@ public class CloudException extends Exception {
      * @param msg the error message
      * @param cause the error that caused this exception to be thrown
      */
-    public CloudException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
+    protected CloudException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
         super(msg, cause);
         this.errorType = type;
         this.httpCode = httpCode;

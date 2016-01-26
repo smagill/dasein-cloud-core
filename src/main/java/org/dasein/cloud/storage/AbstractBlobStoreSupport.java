@@ -19,6 +19,21 @@
 
 package org.dasein.cloud.storage;
 
+import org.apache.commons.codec.binary.Base64;
+import org.dasein.cloud.AbstractProviderService;
+import org.dasein.cloud.CloudException;
+import org.dasein.cloud.CloudProvider;
+import org.dasein.cloud.InternalException;
+import org.dasein.cloud.ResourceNotFoundException;
+import org.dasein.cloud.Tag;
+import org.dasein.cloud.util.NamingConstraints;
+import org.dasein.cloud.util.TagUtils;
+import org.dasein.util.Retry;
+import org.dasein.util.uom.storage.Byte;
+import org.dasein.util.uom.storage.Storage;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -28,21 +43,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 import java.util.concurrent.Callable;
-
-import org.apache.commons.codec.binary.Base64;
-import org.dasein.cloud.AbstractProviderService;
-import org.dasein.cloud.CloudException;
-import org.dasein.cloud.CloudProvider;
-import org.dasein.cloud.InternalException;
-import org.dasein.cloud.Tag;
-import org.dasein.cloud.util.NamingConstraints;
-import org.dasein.cloud.util.TagUtils;
-import org.dasein.util.Retry;
-import org.dasein.util.uom.storage.*;
-import org.dasein.util.uom.storage.Byte;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public abstract class AbstractBlobStoreSupport<T extends CloudProvider> extends AbstractProviderService<T> implements BlobStoreSupport {
 
@@ -95,11 +95,12 @@ public abstract class AbstractBlobStoreSupport<T extends CloudProvider> extends 
 
     protected void copy(@Nullable String sourceBucket, @Nullable String sourceObject, @Nullable String targetBucket, @Nullable String targetObject) throws InternalException, CloudException {
         if( sourceObject == null ) {
-            if( targetBucket == null && !allowsRootObjects() ) {
-                throw new CloudException("Cannot place objects in the root");
+            if( targetBucket == null && !getCapabilities().allowsRootObjects() ) {
+                //todo should we have another exception for invalid parameters
+                throw new InternalException("Cannot place objects in the root");
             }
             if( targetBucket != null && targetBucket.equalsIgnoreCase(sourceBucket) ) {
-                throw new CloudException("Cannot copy in place");
+                throw new InternalException("Cannot copy in place");
             }
             if( targetBucket != null && !exists(targetBucket) ) {
                 createBucket(targetBucket, false);
@@ -171,11 +172,11 @@ public abstract class AbstractBlobStoreSupport<T extends CloudProvider> extends 
         Storage<org.dasein.util.uom.storage.Byte> bytes = getObjectSize(bucketName, objectName);
 
         if( bytes == null ) {
-            throw new CloudException("File does not exist");
+            throw new ResourceNotFoundException("File", bucketName+"/"+objectName);
         }
         transfer.setBytesToTransfer(bytes.getQuantity().intValue());
         if( transfer.getBytesToTransfer() == -1L ) {
-            throw new CloudException("No such file: " + ((bucketName == null ? "/" : "/" + bucketName) + "/" + objectName));
+            throw new ResourceNotFoundException("File", ((bucketName == null ? "/" : "/" + bucketName) + "/" + objectName));
         }
         Thread t = new Thread() {
             public void run() {

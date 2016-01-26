@@ -110,16 +110,17 @@ public class LoadBalancerCreateOptions {
             throw new OperationNotSupportedException("Load balancers are not supported in " + provider.getCloudName());
         }
         if( support.getCapabilities().identifyListenersOnCreateRequirement().equals(Requirement.REQUIRED) && ( listeners == null || listeners.isEmpty() ) ) {
-            throw new CloudException("You must specify at least one listener when creating a load balancer in " + provider.getCloudName());
+            //todo should we have a new exception for Requirements/Capabilities problems?
+            throw new InternalException("You must specify at least one listener when creating a load balancer in " + provider.getCloudName());
         }
         if( support.getCapabilities().identifyEndpointsOnCreateRequirement().equals(Requirement.REQUIRED) && ( endpoints == null || endpoints.isEmpty() ) ) {
-            throw new CloudException("You must specify at least one endpoint when creating a load balancer in " + provider.getCloudName());
+            throw new InternalException("You must specify at least one endpoint when creating a load balancer in " + provider.getCloudName());
         }
         if( support.getCapabilities().isDataCenterLimited() && ( providerDataCenterIds == null || providerDataCenterIds.isEmpty() ) ) {
-            throw new CloudException("You must specify at least one data center when creating a load balancer in " + provider.getCloudName());
+            throw new InternalException("You must specify at least one data center when creating a load balancer in " + provider.getCloudName());
         }
         if( support.getCapabilities().identifyVlanOnCreateRequirement().equals(Requirement.REQUIRED) && providerVlanId == null){
-            throw new CloudException("You must specify the vlan into which the load balancer will be created in " + provider.getCloudName());
+            throw new InternalException("You must specify the vlan into which the load balancer will be created in " + provider.getCloudName());
         }
         if( !support.getCapabilities().isAddressAssignedByProvider() && providerIpAddressId == null ) {
             // attempt to find an address

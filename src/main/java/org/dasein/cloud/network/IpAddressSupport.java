@@ -20,7 +20,7 @@
 package org.dasein.cloud.network;
 
 import org.dasein.cloud.*;
-import org.dasein.cloud.compute.VirtualMachineSupport;
+import org.dasein.cloud.compute.VirtualMachineCapabilities;
 import org.dasein.cloud.identity.ServiceAction;
 
 import javax.annotation.Nonnull;
@@ -182,7 +182,7 @@ public interface IpAddressSupport extends AccessControlledService {
 
     /**
      * When addresses are assignable, they may be assigned at launch, post-launch, or both.
-     * {@link VirtualMachineSupport#identifyStaticIPRequirement()} will tell you what must be done
+     * {@link VirtualMachineCapabilities#identifyStaticIPRequirement()} will tell you what must be done
      * at launch time. This method indicates whether or not assignable IPs may be assigned after launch. This
      * method should never return true when {@link #isAssigned(IPVersion)} returns false.
      * @param version the IP version being checked

@@ -96,7 +96,7 @@ public interface IPAddressCapabilities extends Capabilities{
 
     /**
      * When addresses are assignable, they may be assigned at launch, post-launch, or both.
-     * {@link org.dasein.cloud.compute.VirtualMachineSupport#identifyStaticIPRequirement()} will tell you what must be done
+     * {@link org.dasein.cloud.compute.VirtualMachineCapabilities#identifyStaticIPRequirement()} will tell you what must be done
      * at launch time. This method indicates whether or not assignable IPs may be assigned after launch. This
      * method should never return true when {@link #isAssigned(IPVersion)} returns false.
      * @param version the IP version being checked
