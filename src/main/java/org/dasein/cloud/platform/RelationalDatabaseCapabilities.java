@@ -22,6 +22,7 @@ package org.dasein.cloud.platform;
 import org.dasein.cloud.Capabilities;
 import org.dasein.cloud.CloudException;
 import org.dasein.cloud.InternalException;
+import org.dasein.cloud.Requirement;
 import org.dasein.cloud.util.NamingConstraints;
 
 import javax.annotation.Nonnull;
@@ -52,6 +53,14 @@ public interface RelationalDatabaseCapabilities extends Capabilities{
      * @return the provider term for DB Snapshot
      */
     public @Nonnull String getProviderTermForSnapshot(Locale locale);
+
+    /**
+     * Indicates whether the database engine version is required to be specified during creation of the database
+     * @return the Requirement level
+     * @throws CloudException an error occurred in the cloud provider
+     * @throws InternalException an error occurred within the Dasein Cloud implementation
+     */
+    public @Nonnull Requirement requiresEngineVersion() throws CloudException, InternalException;
 
     /**
      * Indicates whether the RDS Support includes firewall rules
