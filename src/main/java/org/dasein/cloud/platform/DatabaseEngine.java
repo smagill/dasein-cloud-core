@@ -34,27 +34,16 @@ public enum DatabaseEngine {
     SQLSERVER_WEB, // sql server web edition
 
     MYSQL, // mysql
-
+    AURORA, // Amazon's own version of MySQL database
+    MARIADB, // community-developed fork of the MySQL
+    
     ORACLE_EE, // oracle enterprise edition
     ORACLE_SE, // oracle standard edition
     ORACLE_SE1, // oracle standard edition one
 
     POSTGRES, // postgres
     POSTGRES_PLUS; // postgres plus
-
-//    public String getVersion() {
-//        switch( this ) {
-//            case MYSQL: return "5.5";
-//            case MSSQL: return "10 (standard)";
-//            case ORACLE11G: return "11g (standard)";
-//            case ORACLE11GX: return "11g (standard, byol)";
-//            case ORACLE11GEX: return "11g (enterprise, byol)";
-//            case POSTGRES: return "9.3";
-//        }
-//        return null;
-//    }
-//
-
+    
     public String toString() {
         switch( this ) {
             case SQLSERVER_SE:
@@ -67,6 +56,10 @@ public enum DatabaseEngine {
                 return "SQL Server Web";
             case MYSQL:
                 return "MySQL";
+            case MARIADB:
+                return "MariaDB";
+            case AURORA:
+                return "Amazon Aurora";
             case ORACLE_SE:
                 return "Oracle Standard";
             case ORACLE_SE1:
