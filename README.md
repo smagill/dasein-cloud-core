@@ -6,7 +6,7 @@ dasein-cloud-core
 * Source: http://github.org/dasein-cloud/dasein-cloud-core
 * Tutorial: See overview.pdf
 
-https://travis-ci.org/dasein-cloud/dasein-cloud-core.svg?branch=master
+[![Build Status](https://travis-ci.org/dasein-cloud/dasein-cloud-core.svg?branch=master)](https://travis-ci.org/dasein-cloud/dasein-cloud-core)
 
 Dasein Cloud Core is the core API for the Dasein Cloud multi-cloud abstraction API for Java. It is the sole compile-time
 dependency that should exist in your cloud integration code. All other dasein-cloud-* projects are either for test time
