@@ -11,6 +11,6 @@ before_script:
  mvn clean test
 script:
   if["$TRAVIS_TAG"]; then
-    if["$TRAVIS_TAG" =~ "*.pre-release"]
+    if["$TRAVIS_TAG" = "*.pre-release"]
     mvn -B -DdryRun=true -Darguments="-Dmaven.tests.skip=true" release:clean release:prepare release:perform
   fi
