@@ -143,4 +143,22 @@ public interface RelationalDatabaseCapabilities extends Capabilities{
      * @throws InternalException an error occurred assembling the naming constraints object
      */
     public @Nonnull NamingConstraints getRelationalDatabaseNamingConstraints() throws CloudException, InternalException;
+
+    /**
+     * Identifies the naming constraints for admin usernames
+     * @param product the database product for which the constraints apply
+     * @return constraints for the admin usernames
+     * @throws CloudException an error occurred querying the cloud for naming constraints
+     * @throws InternalException an error occurred assembling the naming constraints object
+     */
+    @Nonnull NamingConstraints getAdminUsernameNamingConstraints(DatabaseProduct product) throws CloudException, InternalException;
+
+    /**
+     * Identifies the naming constraints for admin passwords
+     * @param product the database product for which the constraints apply
+     * @return constraints for the admin passwords
+     * @throws CloudException an error occurred querying the cloud for naming constraints
+     * @throws InternalException an error occurred assembling the naming constraints object
+     */
+    @Nonnull NamingConstraints getAdminPasswordNamingConstraints(DatabaseProduct product) throws CloudException, InternalException;
 }
