@@ -76,8 +76,7 @@ public class DaseinParallelRequestExecutor<T> extends AbstractDaseinRequestExecu
                 httpClient.close();
             }
         } catch (Exception e) {
-            //todo is GeneralCloudException right here
-            throw new GeneralCloudException(e.getMessage(), CloudErrorType.GENERAL);
+            throw new GeneralCloudException(e);
         }
     }
 }

@@ -74,9 +74,9 @@ public abstract class AbstractDaseinRequestExecutor<T> {
         if(exception instanceof  CloudResponseException) {
             CloudResponseException e = (CloudResponseException) exception;
             //todo is GeneralCloudException right here?
-            return new GeneralCloudException(e.getErrorType(), e.getHttpCode(), e.getProviderCode(), e.getMessage());
+            return new GeneralCloudException(e);
         } else {
-            return new GeneralCloudException(exception.getMessage(), CloudErrorType.GENERAL);
+            return new GeneralCloudException(exception.getMessage());
         }
     }
 

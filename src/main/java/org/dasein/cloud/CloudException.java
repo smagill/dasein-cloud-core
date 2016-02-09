@@ -55,7 +55,7 @@ public class CloudException extends Exception {
      * Constructs a cloud exception with a specific error message.
      * @param msg the message for the error that occurred
      */
-    protected CloudException(@Nonnull String msg) {
+    protected CloudException(@Nullable String msg) {
         super(msg);
     }
     
@@ -63,7 +63,7 @@ public class CloudException extends Exception {
      * Constructs a cloud exception in response to a specific cause.
      * @param cause the error that caused this exception to be thrown
      */
-    protected CloudException(@Nonnull Throwable cause) {
+    protected CloudException(@Nullable Throwable cause) {
         super(cause);
     }
 
@@ -72,7 +72,7 @@ public class CloudException extends Exception {
      * @param msg the message for the error that occurred
      * @param cause the error that caused this exception to be thrown
      */
-    protected CloudException(@Nonnull String msg, @Nonnull Throwable cause) {
+    protected CloudException(@Nullable String msg, @Nullable Throwable cause) {
         super(msg, cause);
     }
     
@@ -83,7 +83,7 @@ public class CloudException extends Exception {
      * @param providerCode the provider-specific error code
      * @param msg the error message
      */
-    protected CloudException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
+    protected CloudException(@Nullable CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nullable String msg) {
         super(msg);
         this.errorType = type;
         this.httpCode = httpCode;
@@ -98,7 +98,7 @@ public class CloudException extends Exception {
      * @param msg the error message
      * @param cause the error that caused this exception to be thrown
      */
-    protected CloudException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
+    protected CloudException(@Nullable CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nullable String msg, @Nonnull Throwable cause) {
         super(msg, cause);
         this.errorType = type;
         this.httpCode = httpCode;
