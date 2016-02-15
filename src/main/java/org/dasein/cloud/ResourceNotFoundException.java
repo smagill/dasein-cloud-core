@@ -27,8 +27,21 @@ import javax.annotation.Nonnull;
  * Time: 16:20
  */
 public class ResourceNotFoundException extends CloudException {
+    private String resourceType;
+    private String resourceId;
+    
     public ResourceNotFoundException(@Nonnull String resourceType, @Nonnull String resourceId) {
-        super(resourceType+" with id "+resourceId+" can't be found");
+        super(resourceType+" with id " + resourceId + " could not be found");
         this.errorType = CloudErrorType.RESOURCE_NOT_FOUND;
+        this.resourceId = resourceId;
+        this.resourceType = resourceType;
+    }
+
+    public @Nonnull String getResourceType() {
+        return resourceType;
+    }
+
+    public @Nonnull String getResourceId() {
+        return resourceId;
     }
 }

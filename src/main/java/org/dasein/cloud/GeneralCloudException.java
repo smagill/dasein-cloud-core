@@ -19,7 +19,6 @@
 
 package org.dasein.cloud;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -31,32 +30,19 @@ import javax.annotation.Nullable;
  * Time: 15:21
  */
 public class GeneralCloudException extends CloudException {
-    public GeneralCloudException(@Nonnull String msg, @Nonnull CloudErrorType errorType) {
+    public GeneralCloudException(@Nonnull String msg) {
         super(msg);
-        this.errorType = errorType;
+        errorType = CloudErrorType.GENERAL;
+    }
+    
+    public GeneralCloudException(@Nullable Throwable cause) {
+        super(cause);
+        this.errorType = CloudErrorType.GENERAL;
     }
 
-    public GeneralCloudException(@Nonnull String msg, @Nonnull Throwable cause, @Nonnull CloudErrorType errorType) {
+    public GeneralCloudException(@Nonnull String msg, @Nullable Throwable cause) {
         super(msg, cause);
-        this.errorType = errorType;
+        this.errorType = CloudErrorType.GENERAL;
     }
 
-    public GeneralCloudException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg) {
-        super(msg);
-        this.errorType = type;
-        this.httpCode = httpCode;
-        this.providerCode = providerCode;
-    }
-
-    public GeneralCloudException(@Nonnull CloudErrorType type, @Nonnegative int httpCode, @Nullable String providerCode, @Nonnull String msg, @Nonnull Throwable cause) {
-        super(msg, cause);
-        this.errorType = type;
-        this.httpCode = httpCode;
-        this.providerCode = providerCode;
-    }
-
-    @Nonnull
-    public CloudErrorType getErrorType() {
-        return (errorType == null ? CloudErrorType.GENERAL : errorType);
-    }
 }
