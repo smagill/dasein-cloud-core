@@ -81,6 +81,11 @@ public class VirtualMachineProduct implements Serializable {
                 } else {
                     product.setRamSize(new Storage<>(512, Storage.MEGABYTE));
                 }
+                if( p.getRootVolumeSizeInGb() > 0 ) {
+                    product.setRootVolumeSize(new Storage<>(p.getRootVolumeSizeInGb(), Storage.GIGABYTE));
+                } else {
+                    product.setRootVolumeSize(new Storage<>(1, Storage.GIGABYTE));
+                }
                 if( !p.isCurrent() ) {
                     product.setStatusDeprecated();
                 }
