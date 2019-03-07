@@ -1,0 +1,1029 @@
+[
+  {
+    "provider": "AWS",
+    "cloud": "AWS",
+    "created": 1429015313000,
+    "products": [
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I32", "I64"],
+        "id": "m1.small",
+        "name": "Small Instance (m1.small)",
+        "description": "Small Instance (m1.small)",
+        "cpuCount": 1,
+        "rootVolumeSizeInGb": 160,
+        "ramSizeInMb": 1825,
+        "current": false,
+        "customProperties": {
+          "vt": ["paravirtual", "hvm"],
+          "rdt": ["ebs", "instance"]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I32", "I64"],
+        "id": "m1.medium",
+        "name": "Medium Instance (m1.medium)",
+        "description": "Medium Instance (m1.medium)",
+        "cpuCount": 1,
+        "rootVolumeSizeInGb": 410,
+        "ramSizeInMb": 4026,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual",
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "m1.large",
+        "name": "Large Instance (m1.large)",
+        "description": "Large Instance (m1.large)",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 850,
+        "ramSizeInMb": 8053,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "m1.xlarge",
+        "name": "Extra Large Instance (m1.xlarge)",
+        "description": "Extra Large Instance (m1.xlarge)",
+        "cpuCount": 4,
+        "rootVolumeSizeInGb": 1690,
+        "ramSizeInMb": 16106,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "m3.xlarge",
+        "name": "M3 Extra Large Instance (m3.xlarge)",
+        "description": "13 EC2 Compute Units (4 virtual cores with 3.25 EC2 Compute Units each)",
+        "cpuCount": 4,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 16106,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "paravirtual",
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "m3.large",
+        "name": "M3 Large Instance (m3.large)",
+        "description": "6.5 EC2 Compute Units (2 virtual cores with 3.25 EC2 Compute Units each)",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 32,
+        "ramSizeInMb": 7680,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "paravirtual",
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "m3.medium",
+        "name": "M3 Medium Instance (m3.medium)",
+        "description": "3 EC2 Compute Units (1 virtual core with 3 EC2 Compute Units each)",
+        "cpuCount": 1,
+        "rootVolumeSizeInGb": 4,
+        "ramSizeInMb": 3840,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "paravirtual",
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "m3.2xlarge",
+        "name": "M3 Double Extra Large Instance (m3.2xlarge)",
+        "description": "26 EC2 Compute Units (8 virtual cores with 3.25 EC2 Compute Units each)",
+        "cpuCount": 8,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 32212,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "paravirtual",
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I32", "I64"],
+        "id": "t1.micro",
+        "name": "Micro Instance (t1.micro)",
+        "description": "Micro Instance (t1.micro)",
+        "cpuCount": 1,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 660,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual",
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1", "ap-southeast-2"],
+        "architectures": ["I32", "I64"],
+        "id": "t2.nano",
+        "name": "Burstable Instance (t2.nano)",
+        "description": "Variable ECUs, 1 vCPUs, 2.4 GHz, Intel Xeon Family, 0.5 GiB memory, EBS only",
+        "cpuCount": 1,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 537,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "architectures": ["I32", "I64"],
+        "id": "t2.micro",
+        "name": "Burstable Instance (t2.micro)",
+        "description": "Variable ECUs, 1 vCPUs, 2.5 GHz, Intel Xeon Family, 1 GiB memory, EBS only",
+        "cpuCount": 1,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 1074,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "architectures": ["I32", "I64"],
+        "id": "t2.small",
+        "name": "Burstable Instance (t2.small)",
+        "description": "Variable ECUs, 1 vCPUs, 2.5 GHz, Intel Xeon Family, 2 GiB memory, EBS only",
+        "cpuCount": 1,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 2147,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "architectures": ["I32", "I64"],
+        "id": "t2.medium",
+        "name": "Burstable Instance (t2.medium)",
+        "description": "Variable ECUs, 2 vCPUs, 2.5 GHz, Intel Xeon Family, 4 GiB memory, EBS only",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 4295,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "t2.large",
+        "name": "Burstable Instance (t2.large)",
+        "description": "Variable ECUs, 2 vCPUs, 2.4 GHz, Intel Xeon Family, 8 GiB memory, EBS only",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 8590,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "m2.xlarge",
+        "name": "High-Memory Extra Large Instance (m2.xlarge)",
+        "description": "High-Memory Extra Large Instance (m2.xlarge)",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 420,
+        "ramSizeInMb": 18360,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "m2.2xlarge",
+        "name": "High-Memory Double Extra Large Instance (m2.2xlarge)",
+        "description": "High-Memory Double Extra Large Instance (m2.2xlarge)",
+        "cpuCount": 4,
+        "rootVolumeSizeInGb": 850,
+        "ramSizeInMb": 36721,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "m2.4xlarge",
+        "name": "High-Memory Quadruple Extra Large Instance (m2.4xlarge)",
+        "description": "High-Memory Quadruple Extra Large Instance (m2.4xlarge)",
+        "cpuCount": 8,
+        "rootVolumeSizeInGb": 1690,
+        "ramSizeInMb": 73443,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I32", "I64"],
+        "id": "c1.medium",
+        "name": "Compute Optimized Medium Instance (Previous Generation) (c1.medium)",
+        "description": "Compute Optimized Medium Instance (Previous Generation) (c1.medium)",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 350,
+        "ramSizeInMb": 1825,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual",
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "c1.xlarge",
+        "name": "Compute Optimized Extra Large Instance (Previous Generation) (c1.xlarge)",
+        "description": "Compute Optimized Extra Large Instance (Previous Generation) (c1.xlarge)",
+        "cpuCount": 8,
+        "rootVolumeSizeInGb": 1690,
+        "ramSizeInMb": 7516,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "paravirtual",
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "cc2.8xlarge",
+        "name": "Cluster Compute Eight Extra Large (cc2.8xlarge)",
+        "description": "88 EC2 Compute Units (2 x Intel Xeon E5-2670, eight-core 'Sandy Bridge' architecture)",
+        "cpuCount": 32,
+        "rootVolumeSizeInGb": 3370,
+        "ramSizeInMb": 64961,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "cr1.8xlarge",
+        "name": "High Memory Cluster Eight Extra Large Instance (cr1.8xlarge)",
+        "description": "88 EC2 Compute Units (2 x Intel Xeon E5-2670, eight-core. Intel Turbo, NUMA)",
+        "cpuCount": 32,
+        "rootVolumeSizeInGb": 240,
+        "ramSizeInMb": 261993,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "cg1.4xlarge",
+        "name": "Cluster GPU Quadruple Extra Large Instance (cg1.4xlarge)",
+        "description": "33.5 EC2 Compute Units (2 x Intel Xeon X5570, quad-core 'Nehalem' architecture)",
+        "cpuCount": 16,
+        "rootVolumeSizeInGb": 1690,
+        "ramSizeInMb": 24159,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "g2.2xlarge",
+        "name": "GPU Double Extra Large Instance (g2.2xlarge)",
+        "description": "GPU Double Extra Large Instance (Intel Xeon E5-2670, eight-core 'Sandy Bridge' architecture, NVIDIA GRID GPU)",
+        "cpuCount": 8,
+        "rootVolumeSizeInGb": 60,
+        "ramSizeInMb": 16106,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "hi1.4xlarge",
+        "name": "High I/O Instance (hi1.4xlarge)",
+        "description": "35 EC2 Compute Units (16 virtual cores)",
+        "cpuCount": 16,
+        "rootVolumeSizeInGb": 2048,
+        "ramSizeInMb": 64961,
+        "current": false,
+        "customProperties": {
+          "vt": [
+            "hvm",
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["eu-central-1"],
+        "architectures": ["I64"],
+        "id": "hs1.8xlarge",
+        "name": "High Storage Instance (hs1.8xlarge)",
+        "description": "35 EC2 Compute Units (16 virtual cores)",
+        "cpuCount": 16,
+        "rootVolumeSizeInGb": 49152,
+        "ramSizeInMb": 125627,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm",
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64", "I32"],
+        "id": "c3.large",
+        "name": "Compute Optimized Large (c3.large)",
+        "description": "Compute Optimized Large (c3.large)",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 32,
+        "ramSizeInMb": 4027,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm",
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "c3.xlarge",
+        "name": "Compute Optimized Extra Large (c3.xlarge)",
+        "description": "Compute Optimized Extra Large (c3.xlarge)",
+        "cpuCount": 4,
+        "rootVolumeSizeInGb": 80,
+        "ramSizeInMb": 8053,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm",
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "c3.2xlarge",
+        "name": "Compute Optimized Double Extra Large (c3.2xlarge)",
+        "description": "Compute Optimized Double Extra Large (c3.2xlarge)",
+        "cpuCount": 8,
+        "rootVolumeSizeInGb": 160,
+        "ramSizeInMb": 16106,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm",
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "c3.4xlarge",
+        "name": "Compute Optimized Quadruple Extra Large (c3.4xlarge)",
+        "description": "Compute Optimized Quadruple Extra Large (c3.4xlarge)",
+        "cpuCount": 16,
+        "rootVolumeSizeInGb": 320,
+        "ramSizeInMb": 32212,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm",
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "c3.8xlarge",
+        "name": "Compute Optimized Eight Extra Large (c3.2xlarge)",
+        "description": "Compute Optimized Eight Extra Large (c3.8xlarge)",
+        "cpuCount": 32,
+        "rootVolumeSizeInGb": 640,
+        "ramSizeInMb": 64424,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm",
+            "paravirtual"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures" : [ "I64" ],
+        "id" : "c4.large",
+        "name" : "Compute Optimized C4 Large Instance (c4.large)",
+        "description" : "Intel Xeon E5-2666 v3 (Haswell) CPU, EBS storage",
+        "cpuCount" : 2,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 3840,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "architectures" : [ "I64" ],
+        "id" : "c4.xlarge",
+        "name" : "Compute Optimized C4 Extra Large Instance (c4.xlarge)",
+        "description" : "Intel Xeon E5-2666 v3 (Haswell) CPU, EBS storage",
+        "cpuCount" : 4,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 7680,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "architectures" : [ "I64" ],
+        "id" : "c4.2xlarge",
+        "name" : "Compute Optimized C4 Double Extra Large Instance (c4.2xlarge)",
+        "description" : "Intel Xeon E5-2666 v3 (Haswell) CPU, EBS storage",
+        "cpuCount" : 8,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 15360,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "architectures" : [ "I64" ],
+        "id" : "c4.4xlarge",
+        "name" : "Compute Optimized C4 Quadruple Extra Large Instance (c4.4xlarge)",
+        "description" : "Intel Xeon E5-2666 v3 (Haswell) CPU, EBS storage",
+        "cpuCount" : 16,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 30720,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "architectures" : [ "I64" ],
+        "id" : "c4.8xlarge",
+        "name" : "Compute Optimized C4 Octuple Extra Large Instance (c4.8xlarge)",
+        "description" : "Intel Xeon E5-2666 v3 (Haswell) CPU, EBS storage",
+        "cpuCount" : 36,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 61440,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["us-west-1", "sa-east-1"],
+        "architectures" : [ "I64" ],
+        "id" : "d2.xlarge",
+        "name" : "Dense-storage D2 Extra Large Instance (d2.xlarge)",
+        "description" : "Intel Xeon E5-2676v3 (Haswell) CPU, HDD storage",
+        "cpuCount" : 4,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 31232,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["us-west-1", "sa-east-1"],
+        "architectures" : [ "I64" ],
+        "id" : "d2.2xlarge",
+        "name" : "Dense-storage D2 Double Extra Large Instance (d2.2xlarge)",
+        "description" : "Intel Xeon E5-2676v3 (Haswell) CPU, HDD storage",
+        "cpuCount" : 8,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 62464,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["us-west-1", "sa-east-1"],
+        "architectures" : [ "I64" ],
+        "id" : "d2.4xlarge",
+        "name" : "Dense-storage D2 Quadruple Extra Large Instance (d2.4xlarge)",
+        "description" : "Intel Xeon E5-2676v3 (Haswell) CPU, HDD storage",
+        "cpuCount" : 16,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 124928,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "excludesRegions": ["us-west-1", "sa-east-1"],
+        "architectures" : [ "I64" ],
+        "id" : "d2.8xlarge",
+        "name" : "Dense-storage D2 Octuple Extra Large Instance (d2.8xlarge)",
+        "description" : "Intel Xeon E5-2676v3 (Haswell) CPU, HDD storage",
+        "cpuCount" : 36,
+        "rootVolumeSizeInGb" : 1,
+        "ramSizeInMb" : 249856,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "i2.xlarge",
+        "name": "High I/O Instance Extra Large (i2.xlarge)",
+        "description": "High I/O Instance Extra Large (i2.xlarge)",
+        "cpuCount": 4,
+        "rootVolumeSizeInGb": 800,
+        "ramSizeInMb": 32749,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "i2.2xlarge",
+        "name": "High I/O Instance Double Extra Large (i2.2xlarge)",
+        "description": "High I/O Instance Double Extra Large (i2.2xlarge)",
+        "cpuCount": 8,
+        "rootVolumeSizeInGb": 1600,
+        "ramSizeInMb": 65498,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "i2.4xlarge",
+        "name": "High I/O Instance Quadruple Extra Large (i2.4xlarge)",
+        "description": "High I/O Instance Quadruple Extra Large (i2.4xlarge)",
+        "cpuCount": 16,
+        "rootVolumeSizeInGb": 3200,
+        "ramSizeInMb": 130996,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "i2.8xlarge",
+        "name": "High I/O Instance Eight Extra Large (i2.8xlarge)",
+        "description": "High I/O Instance Eight Extra Large (i2.8xlarge)",
+        "cpuCount": 32,
+        "rootVolumeSizeInGb": 6400,
+        "ramSizeInMb": 261993,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "r3.large",
+        "name": "Memory-Optimized EC2 Instance Large (r3.large)",
+        "description": "Memory-Optimized EC2 Instance Large (r3.large)",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 32,
+        "ramSizeInMb": 15360,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "r3.xlarge",
+        "name": "Memory-Optimized EC2 Instance Extra Large (r3.xlarge)",
+        "description": "Memory-Optimized EC2 Instance Extra Large (r3.xlarge)",
+        "cpuCount": 4,
+        "rootVolumeSizeInGb": 80,
+        "ramSizeInMb": 31232,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "r3.2xlarge",
+        "name": "Memory-Optimized EC2 Instance Twice Extra Large (r3.2xlarge)",
+        "description": "Memory-Optimized EC2 Instance Twice Extra Large (r3.2xlarge)",
+        "cpuCount": 8,
+        "rootVolumeSizeInGb": 160,
+        "ramSizeInMb": 62464,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "r3.4xlarge",
+        "name": "Memory-Optimized EC2 Instance Quadruple Extra Large (r3.4xlarge)",
+        "description": "Memory-Optimized EC2 Instance Quadruple Extra Large (r3.4xlarge)",
+        "cpuCount": 16,
+        "rootVolumeSizeInGb": 320,
+        "ramSizeInMb": 124928,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "r3.8xlarge",
+        "name": "Memory-Optimized EC2 Instance Eight Extra Large (r3.8xlarge)",
+        "description": "Memory-Optimized EC2 Instance Eight Extra Large (r3.8xlarge)",
+        "cpuCount": 32,
+        "rootVolumeSizeInGb": 640,
+        "ramSizeInMb": 249856,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs",
+            "instance"
+          ]
+        }
+      },
+      {
+        "architectures": ["I64"],
+        "id": "m4.large",
+        "name": "General Purpose M4 Large Instance (m4.large)",
+        "description": "6.5 ECUs, 2 vCPUs, 2.4 GHz, Intel Xeon E5-2676v3, 8 GiB memory, EBS only",
+        "cpuCount": 2,
+        "rootVolumeSizeInGb": 1,
+        "ramSizeInMb": 8592,
+        "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+      "architectures": ["I64"],
+      "id": "m4.xlarge",
+      "name": "General Purpose M4 Large Instance (m4.xlarge)",
+      "description": "13 ECUs, 4 vCPUs, 2.4 GHz, Intel Xeon E5-2676v3, 16 GiB memory, EBS only",
+      "cpuCount": 4,
+      "rootVolumeSizeInGb": 1,
+      "ramSizeInMb": 17184,
+      "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+      "architectures": ["I64"],
+      "id": "m4.2xlarge",
+      "name": "General Purpose M4 Large Instance (m4.2xlarge)",
+      "description": "26 ECUs, 8 vCPUs, 2.4 GHz, Intel Xeon E5-2676v3, 32 GiB memory, EBS only",
+      "cpuCount": 8,
+      "rootVolumeSizeInGb": 1,
+      "ramSizeInMb": 34368,
+      "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+      "architectures": ["I64"],
+      "id": "m4.4xlarge",
+      "name": "General Purpose M4 Large Instance (m4.4xlarge)",
+      "description": "53.5 ECUs, 16 vCPUs, 2.4 GHz, Intel Xeon E5-2676v3, 64 GiB memory, EBS only",
+      "cpuCount": 16,
+      "rootVolumeSizeInGb": 1,
+      "ramSizeInMb": 68736,
+      "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+      },
+      {
+      "architectures": ["I64"],
+       "id": "m4.10xlarge",
+       "name": "General Purpose M4 Large Instance (m4.10xlarge)",
+       "description": "124.5 ECUs, 40 vCPUs, 2.4 GHz, Intel Xeon E5-2676v3, 160 GiB memory, EBS only",
+       "cpuCount": 40,
+       "rootVolumeSizeInGb": 1,
+       "ramSizeInMb": 171840,
+       "current": true,
+        "customProperties": {
+          "vt": [
+            "hvm"
+          ],
+          "rdt": [
+            "ebs"
+          ]
+        }
+    }
+    ]
+  }
+]

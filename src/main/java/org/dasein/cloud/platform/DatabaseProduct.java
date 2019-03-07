@@ -19,7 +19,21 @@
 
 package org.dasein.cloud.platform;
 
+import org.dasein.cloud.InternalException;
+import org.dasein.cloud.ProviderContext;
+import org.dasein.cloud.util.products.ProductReader;
+import org.dasein.cloud.util.products.ProductReaderException;
+import org.dasein.cloud.util.products.model.DatabaseProductDefinition;
+import org.dasein.cloud.util.products.model.DatabaseProductProvider;
+import org.dasein.cloud.util.products.model.DatabaseRegion;
+import org.dasein.cloud.util.products.model.VmProductProvider;
+
+import javax.annotation.Nonnull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.dasein.cloud.platform.DatabaseLicenseModel.*;
 
 public class DatabaseProduct implements Serializable {
     private static final long serialVersionUID = -5535140342676937943L;
@@ -43,6 +57,52 @@ public class DatabaseProduct implements Serializable {
     public DatabaseProduct( String databaseSizeId, String databaseSizeName ) {
         this.productSize = databaseSizeId;
         this.name = databaseSizeName;
+    }
+
+    static public @Nonnull DatabaseProduct[] fromConfigurationFile(@Nonnull String pathToFile, @Nonnull ProviderContext context) throws InternalException {
+        try {
+            List<DatabaseProduct> products = new ArrayList<>();
+            DatabaseProductProvider databaseProvider = ProductReader.readDatabaseProducts(pathToFile,
+                    context.getCloud().getProviderName());
+
+            List<org.dasein.cloud.util.products.model.DatabaseEngine> databaseEngines = databaseProvider.getEngines();
+
+            for( org.dasein.cloud.util.products.model.DatabaseEngine databaseEngine : databaseEngines ) {
+                for ( DatabaseRegion region : databaseEngine.getRegions() ) {
+                    if( region.getName().equalsIgnoreCase( context.getRegionId()) ) {
+                        for( org.dasein.cloud.util.products.model.DatabaseProduct databaseProduct : region.getProducts() ) {
+                            DatabaseProduct product = new DatabaseProduct(databaseProduct.getName());
+                            product.setEngine(DatabaseEngine.valueOf(databaseEngine.getName()));
+                            product.setHighAvailability(databaseProduct.isHighAvailability());
+                            product.setStandardHourlyRate(databaseProduct.getHourlyRate());
+                            product.setStandardIoRate(databaseProduct.getIoRate());
+                            product.setStandardStorageRate(databaseProduct.getStorageRate());
+                            DatabaseLicenseModel lic = GENERAL_PUBLIC_LICENSE;
+                            if( "included".equalsIgnoreCase(databaseProduct.getLicense())) {
+                                lic = LICENSE_INCLUDED;
+                            } else if( "byol".equalsIgnoreCase(databaseProduct.getLicense())) {
+                                lic = BRING_YOUR_OWN_LICENSE;
+                            } else if( "postgres".equalsIgnoreCase(databaseProduct.getLicense())) {
+                                lic = POSTGRESQL_LICENSE;
+                            }
+                            product.setLicenseModel(lic);
+                            product.setCurrency(databaseProduct.getCurrency());
+                            DatabaseProductDefinition def = databaseProvider.findProductDefinition(databaseProduct.getName());
+                            if( def != null) {
+                                product.setName(String.format("%.2fGB RAM, %d CPU, %s Network Performance", def.getMemory(), def.getvCpus(), def.getNetworkPerformance()));
+                            }
+                            product.setStorageInGigabytes(databaseProduct.getMinStorage());
+                            products.add(product);
+                        }
+                    }
+                }
+            }
+            return products.toArray(new DatabaseProduct[products.size()]);
+        }
+        catch (ProductReaderException pre) {
+            throw new InternalException("Unable to read product configuration file " + pathToFile, pre);
+        }
+        finally {}
     }
 
     public String getProductSize() {

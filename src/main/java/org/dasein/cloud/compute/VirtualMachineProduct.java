@@ -19,21 +19,24 @@
 
 package org.dasein.cloud.compute;
 
+import org.dasein.cloud.InternalException;
+import org.dasein.cloud.ProviderContext;
 import org.dasein.cloud.VisibleScope;
+import org.dasein.cloud.util.products.ProductReader;
+import org.dasein.cloud.util.products.ProductReaderException;
+import org.dasein.cloud.util.products.model.VmProductProvider;
+import org.dasein.cloud.util.products.model.VolumeProvider;
 import org.dasein.util.uom.storage.Gigabyte;
 import org.dasein.util.uom.storage.Megabyte;
 import org.dasein.util.uom.storage.Storage;
+import org.dasein.util.uom.storage.StorageUnit;
+import org.json.JSONArray;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("UnusedDeclaration")
 public class VirtualMachineProduct implements Serializable {
@@ -59,6 +62,67 @@ public class VirtualMachineProduct implements Serializable {
     public VirtualMachineProduct() {
     }
 
+    static public @Nonnull VirtualMachineProduct[] fromConfigurationFile(@Nonnull String pathToFile, @Nonnull ProviderContext context) throws InternalException {
+        try {
+            VmProductProvider provider = ProductReader.readVmProducts(pathToFile, context.getCloud().getProviderName());
+            List<VirtualMachineProduct> result = new ArrayList<>();
+            List<org.dasein.cloud.util.products.model.VmProduct> products = provider.getProducts();
+            for( org.dasein.cloud.util.products.model.VmProduct p : products ) {
+                if( p.getExcludesRegions() != null && Arrays.binarySearch(p.getExcludesRegions(), context.getRegionId()) >= 0 ) {
+                    continue;
+                }
+                VirtualMachineProduct product = new VirtualMachineProduct();
+                product.setName(p.getName());
+                product.setDescription(p.getDescription());
+                product.setCpuCount(p.getCpuCount());
+                product.setProviderProductId(p.getId());
+                if( p.getRamSizeInMb() > 0) {
+                    product.setRamSize(new Storage<>(p.getRamSizeInMb(), Storage.MEGABYTE));
+                } else {
+                    product.setRamSize(new Storage<>(512, Storage.MEGABYTE));
+                }
+                if( p.getRootVolumeSizeInGb() > 0 ) {
+                    product.setRootVolumeSize(new Storage<>(p.getRootVolumeSizeInGb(), Storage.GIGABYTE));
+                } else {
+                    product.setRootVolumeSize(new Storage<>(1, Storage.GIGABYTE));
+                }
+                if( !p.isCurrent() ) {
+                    product.setStatusDeprecated();
+                }
+                List<Architecture> architectures = new ArrayList<>();
+                for( String arch : p.getArchitectures() ) {
+                    architectures.add(Architecture.valueOf(arch));
+                }
+                product.setArchitectures(architectures.toArray(new Architecture[architectures.size()]));
+                Map<String, Object> props = p.getCustomProperties();
+                if( props != null ) {
+                    for( String key : props.keySet() ) {
+                        Object values = props.get(key);
+                        if( values instanceof List ) {
+                            List<String> arrayValues = ( List<String> ) values;
+                            StringBuilder sb = new StringBuilder();
+
+                            for( int i=0; i<arrayValues.size(); i++ ) {
+                                if( sb.length() > 0 ) {
+                                    sb.append(",");
+                                }
+                                sb.append(arrayValues.get(i));
+                            }
+                            product.getProviderMetadata().put(key, sb.toString());
+                        }
+                        else {
+                            product.getProviderMetadata().put(key, ( String ) values);
+                        }
+                    }
+                }
+                result.add(product);
+            }
+            return result.toArray(new VirtualMachineProduct[result.size()]);
+        }
+        catch( ProductReaderException e ) {
+            throw new InternalException("Unable to read product configuration file " + pathToFile, e);
+        }
+    }
     // TODO(stas): shouldn't this also compare other attributes?
     public boolean equals(Object ob) {
         return ( ob != null && ( ob == this || getClass().getName().equals(ob.getClass().getName()) && getProviderProductId().equals(( ( VirtualMachineProduct ) ob ).getProviderProductId()) ) );

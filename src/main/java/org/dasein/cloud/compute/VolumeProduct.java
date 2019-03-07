@@ -19,12 +19,20 @@
 
 package org.dasein.cloud.compute;
 
+import org.dasein.cloud.InternalException;
+import org.dasein.cloud.ProviderContext;
+import org.dasein.cloud.util.products.ProductReader;
+import org.dasein.cloud.util.products.ProductReaderException;
+import org.dasein.cloud.util.products.model.VolumePrice;
+import org.dasein.cloud.util.products.model.VolumeProvider;
 import org.dasein.util.uom.storage.Gigabyte;
 import org.dasein.util.uom.storage.Storage;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a standard product in a cloud provider catalog for allocating volumes. A cloud will typically have
@@ -95,7 +103,33 @@ public class VolumeProduct {
     static public @Nonnull VolumeProduct getInstance(@Nonnull String id, @Nonnull String name, @Nonnull String description, @Nonnull VolumeType type, @Nonnull Storage<?> volumeSize, @Nonnull String currency, @Nonnegative int minIops, @Nonnegative int maxIops, @Nullable Float monthlyCost, @Nullable Float iopsCost) {
         return new VolumeProduct(id, name, description, type, (Storage<Gigabyte>)volumeSize.convertTo(Storage.GIGABYTE), currency, minIops, maxIops, monthlyCost, iopsCost);
     }
-    
+
+    static public @Nonnull VolumeProduct[] fromConfigurationFile(@Nonnull String pathToFile, @Nonnull ProviderContext context) throws InternalException {
+        try {
+            VolumeProvider provider = ProductReader.readVolumeProducts(pathToFile, context.getCloud().getProviderName());
+            List<VolumeProduct> result = new ArrayList<>();
+            List<org.dasein.cloud.util.products.model.VolumeProduct> products = provider.getProducts();
+            for( org.dasein.cloud.util.products.model.VolumeProduct p : products ) {
+                VolumePrice price = provider.findProductPrice(context.getRegionId(), p.getId());
+                float monthlyPrice = 0;
+                float iopsPrice = 0;
+                if( price != null ) {
+                    monthlyPrice = price.getMonthly();
+                    iopsPrice = price.getIops();
+                }
+                VolumeProduct product = VolumeProduct.getInstance(p.getId(), p.getName(), p.getDescription(), VolumeType.valueOf(p.getType().toUpperCase()), p.getMinIops(), p.getMaxIops(), monthlyPrice, iopsPrice);
+                product.withMaxIopsRatio(p.getIopsToGb());
+                product.withMaxVolumeSize(new Storage<>(p.getMaxSize(), Storage.GIGABYTE));
+                product.withMinVolumeSize(new Storage<>(p.getMinSize(), Storage.GIGABYTE));
+                result.add(product);
+            }
+            return result.toArray(new VolumeProduct[result.size()]);
+        }
+        catch( ProductReaderException e ) {
+            throw new InternalException("Unable to read product configuration file " + pathToFile, e);
+        }
+    }
+
     private String                  currency;
     private String                  description;
     private Float                   iopsCost;
